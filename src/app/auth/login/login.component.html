@@ -1,0 +1,109 @@
+<section class="main">
+  <div class="container">
+    <form
+    class="form" 
+    [formGroup]="loginForm" 
+    (ngSubmit)="login()" 
+    [@slideUp]>
+
+      <!-- server validation errors -->
+      <div class="row">
+        <div
+        *ngIf="loginResponseErrors && loginResponseErrors.length > 0" 
+        class="col-xs-12 col-md-8 col-md-offset-2">
+          <div 
+          class="alert alert-danger"
+          *ngFor="let error of loginResponseErrors">
+          <strong>{{ error }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+          <!-- EMAIL BS3-FORM-GROUP -->
+          <div 
+          class="form-group has-feedback"
+          [class.has-error]="email.invalid && email.touched"
+          [class.has-success]="email.valid && email.touched">
+            <label 
+            for="email"
+            class="hidden-xs control-label">Email</label>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-envelope-o"></i>
+              </div>
+              <!-- email input field -->
+              <input
+              [formControlName]="'email'"
+              id="email" 
+              type="email" 
+              class="form-control" 
+              placeholder="email">
+              <!-- input feedback icon -->
+              <span 
+              *ngIf="email.touched"
+              class="fa form-control-feedback"
+              [class.fa-check]="email.valid"
+              [class.fa-warning]="email.invalid"></span>
+            </div>
+            <!-- input error help message -->
+            <p class="help-block">
+              <ng-template [ngIf]="email.invalid && email.touched">
+                <span [@shrink] *ngIf="email['errors']['required']">Email is required</span>
+                <span [@shrink] *ngIf="email['errors']['invalidEmail']">Not a valid email address</span>
+              </ng-template>
+            </p>
+          </div>
+          <!-- PASSWORD BS3-FORM-GROUP -->
+          <div 
+          class="form-group has-feedback"
+          [class.has-error]="password.invalid && password.touched"
+          [class.has-success]="password.valid && password.touched">
+            <label 
+            for="password"
+            class="hidden-xs control-label">Password</label>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-key"></i>
+              </div>
+              <!-- password input field -->
+              <input
+              [formControlName]="'password'"
+              id="password" 
+              type="password" 
+              class="form-control" 
+              placeholder="password">
+              <!-- input feedback icon -->
+              <span 
+              *ngIf="password.touched"
+              class="fa form-control-feedback"
+              [class.fa-check]="password.valid"
+              [class.fa-warning]="password.invalid"></span>
+            </div>
+            <p class="help-block">
+              <ng-template [ngIf]="password.invalid && password.touched">
+                <span [@shrink] *ngIf="password['errors']['required']">Password is required</span>
+                <span [@shrink] *ngIf="password['errors']['minlength']&& !password['errors']['required']">Password minimum length 6 characters</span>
+              </ng-template>
+            </p>
+          </div>
+          <!-- FORM BUTTONS GROUP -->
+          <div class="form-group">
+            <hr>
+            <button 
+            class="btn btn-primary pull-right"
+            [disabled]="loginForm.invalid">Login</button>
+            <button 
+            class="btn btn-warning pull-right form-reset-button"
+            [disabled]="loginForm.pristine"
+            (click)="resetForm()">Reset</button>
+            <a
+            class="form-link"
+            [routerLink]="['/auth/signup']">Register</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

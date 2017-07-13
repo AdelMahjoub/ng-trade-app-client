@@ -1,0 +1,42 @@
+<section class="main">
+  <div class="container">
+    <div class="row" *ngIf="!path">
+      <div class="col-xs-12 col-md-12">
+        <div class="page-header">
+          <h1>Games</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="games.length > 0">
+      <app-game-item 
+      *ngFor="let game of pageItems" 
+      [game]="game"></app-game-item>
+    </div>
+
+    <div class="row" *ngIf="pages.length > 0 && path !== 'users-requests'">
+      <div class="col-xs-12 col-md-12 text-center">
+        <hr>
+        <ul class="pagination">
+          <li>
+            <a
+            (click)="previousPage()" 
+            style="cursor: pointer;">&laquo;</a>
+          </li>
+          <li 
+          *ngFor="let n of pages"
+          [ngClass]="{'active': (index / itemsPerPage) === n}">
+            <a
+            (click)="onPageNumberClick(n)"
+            style="cursor: pointer">{{n + 1}}</a>
+          </li>
+          <li>
+            <a
+            (click)="nextPage()" 
+            style="cursor: pointer;">&raquo;</a>
+          </li>
+        </ul>
+        <hr>
+      </div>
+    </div>
+  </div>
+</section>

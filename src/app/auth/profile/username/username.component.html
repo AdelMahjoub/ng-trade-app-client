@@ -1,0 +1,50 @@
+<form [formGroup]="usernameForm" (ngSubmit)="submit()">
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+     
+      <!-- Username -->
+      <div 
+      class="form-group has-feedback"
+      [class.has-error]="username.invalid && username.touched"
+      [class.has-success]="username.valid && username.touched">
+        <label 
+        for="username"
+        class="hidden-xs control-label">Username</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-user"></i>
+          </div>
+          <!-- username input field -->
+          <input
+          #usernameField
+          [formControlName]="'username'"
+          id="username" 
+          type="text" 
+          class="form-control" 
+          placeholder="username">
+          <!-- input feedback icon -->
+          <span 
+          *ngIf="username.touched"
+          class="fa form-control-feedback"
+          [class.fa-check]="username.valid"
+          [class.fa-warning]="username.invalid"></span>
+        </div>
+        <!-- input error help message -->
+        <p class="help-block">
+          <ng-template [ngIf]="username.invalid && username.touched">
+            <span *ngIf="username['errors']['required']">The username is required</span>
+            <span *ngIf="username['errors']['minlength'] && !username['errors']['required']">Minimum username length is 4 characters.</span>
+            <span *ngIf="username['errors']['usernameIsUsed']">This username is already used</span>
+          </ng-template>
+        </p>
+      </div>
+
+      <!-- FORM BUTTONS GROUP -->
+      <div class="form-group">
+        <button 
+        class="btn btn-primary pull-right"
+        [disabled]="usernameForm.invalid">Update</button>
+      </div>
+    </div>   
+  </div>
+</form>

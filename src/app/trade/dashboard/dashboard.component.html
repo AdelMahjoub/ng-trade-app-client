@@ -1,0 +1,56 @@
+<section class="main">
+  <div class="container">
+    <!-- username -->
+    <div class="row" style="margin-top: 50px;">
+      <div class="col-xs-12 col-md-12 clear-fix">
+        <div class="pull-right">
+          <span *ngIf="user" [innerText]="user['username']"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Horizontal line -->
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <hr>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+      <!-- Nav links -->
+      <ul class="nav nav-pills">
+        <li 
+        [routerLinkActive]="'active'">
+          <a [routerLink]="['my-games']">My Games</a>
+        </li>
+        <li [routerLinkActive]="'active'">
+          <a [routerLink]="['my-requests']">My Requests</a>
+        </li>
+        <li [routerLinkActive]="'active'">
+          <a [routerLink]="['users-requests']">Users Requests</a>
+        </li>
+        <li [routerLinkActive]="'active'">
+          <a [routerLink]="['add-games']">Add Games</a>
+        </li>
+      </ul>
+        
+      </div> 
+    </div>
+
+    <!-- Horizontal line -->
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <hr>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="row">
+      <div class="col-xs-12 col-md-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,142 @@
+<section class="main">
+  <div class="container">
+    <form
+    class="form" 
+    [formGroup]="signupForm" 
+    (ngSubmit)="register()" 
+    [@slideUp]>
+
+      <!-- server validation errors -->
+      <div class="row">
+        <div
+        *ngIf="signupResponseErrors && signupResponseErrors.length > 0" 
+        class="col-xs-12 col-md-8 col-md-offset-2">
+          <div 
+          class="alert alert-danger"
+          *ngFor="let error of signupResponseErrors">
+          <strong>{{ error }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+          <!-- EMAIL BS3-FORM-GROUP -->
+          <div 
+          class="form-group has-feedback"
+          [class.has-error]="email.invalid && email.touched"
+          [class.has-success]="email.valid && email.touched">
+            <label 
+            for="email"
+            class="hidden-xs control-label">Email</label>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-envelope-o"></i>
+              </div>
+              <!-- email input field -->
+              <input
+              [formControlName]="'email'"
+              id="email" 
+              type="email" 
+              class="form-control" 
+              placeholder="email">
+              <!-- input feedback icon -->
+              <span 
+              *ngIf="email.touched"
+              class="fa form-control-feedback"
+              [class.fa-check]="email.valid"
+              [class.fa-warning]="email.invalid"></span>
+            </div>
+            <!-- input error help message -->
+            <p class="help-block">
+              <ng-template [ngIf]="email.invalid && email.touched">
+                <span [@shrink] *ngIf="email['errors']['required']">Email is required</span>
+                <span [@shrink] *ngIf="email['errors']['invalidEmail'] && !email['errors']['required']">Not a valid email address</span>
+                <span [@shrink] *ngIf="email['errors']['emailIsUsed']">Email already registred</span>
+              </ng-template>
+            </p>
+          </div>
+          <!-- PASSWORD BS3-FORM-GROUP -->
+          <div 
+          class="form-group has-feedback"
+          [class.has-error]="password.invalid && password.touched"
+          [class.has-success]="password.valid && password.touched">
+            <label 
+            for="password"
+            class="hidden-xs control-label">Password</label>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-key"></i>
+              </div>
+              <!-- password input field -->
+              <input
+              [formControlName]="'password'"
+              id="password" 
+              type="password" 
+              class="form-control" 
+              placeholder="password">
+              <!-- input feedback icon -->
+              <span 
+              *ngIf="password.touched"
+              class="fa form-control-feedback"
+              [class.fa-check]="password.valid"
+              [class.fa-warning]="password.invalid"></span>
+            </div>
+            <p class="help-block">
+              <ng-template [ngIf]="password.invalid && password.touched">
+                <span [@shrink] *ngIf="password['errors']['required']">Password is required</span>
+                <span [@shrink] *ngIf="password['errors']['minlength']&& !password['errors']['required']">Password minimum length 6 characters</span>
+              </ng-template>
+            </p>
+          </div>
+          <!-- PASSWORD CONFIRM BS3-FORM-GROUP -->
+          <div 
+          class="form-group has-feedback"
+          [class.has-error]="passwordConfirm.invalid && passwordConfirm.touched"
+          [class.has-success]="passwordConfirm.valid && passwordConfirm.touched">
+            <label 
+            for="password-confirm"
+            class="hidden-xs control-label">Confirm Password</label>
+            <div class="input-group">
+              <div class="input-group-addon">
+                <i class="fa fa-key"></i>
+              </div>
+              <!-- password-confirm input field -->
+              <input
+              [formControlName]="'passwordConfirm'"
+              id="password-confirm" 
+              type="password" 
+              class="form-control" 
+              placeholder="confirm password">
+              <!-- input feedback icon -->
+              <span 
+              *ngIf="passwordConfirm.touched"
+              class="fa form-control-feedback"
+              [class.fa-check]="passwordConfirm.valid"
+              [class.fa-warning]="passwordConfirm.invalid"></span>
+            </div>
+            <p class="help-block">
+              <ng-template [ngIf]="passwordConfirm.invalid && passwordConfirm.touched">
+                <span [@shrink] *ngIf="passwordConfirm['errors']['required']">Please confirm your password</span>
+                <span [@shrink] *ngIf="passwordConfirm['errors']['passwordMismatch'] && !passwordConfirm['errors']['required']">Passwords do not match</span>
+              </ng-template>
+            </p>
+          </div>
+          <div class="form-group">
+            <hr>
+            <button 
+            class="btn btn-primary pull-right"
+            [disabled]="signupForm.invalid">Rgister</button>
+            <button 
+            class="btn btn-warning pull-right form-reset-button"
+            [disabled]="signupForm.pristine"
+            (click)="resetForm()">Reset</button>
+            <a
+            class="form-link"
+            [routerLink]="['']">Cancel</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

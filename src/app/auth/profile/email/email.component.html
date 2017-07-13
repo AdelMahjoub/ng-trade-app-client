@@ -1,0 +1,47 @@
+<form [formGroup]="emailForm" (ngSubmit)="submit()">
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <div 
+      class="form-group has-feedback"
+      [class.has-error]="email.invalid && email.touched"
+      [class.has-success]="email.valid && email.touched">
+        <label 
+        for="email"
+        class="hidden-xs control-label">Email</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-envelope-o"></i>
+          </div>
+          <!-- email input field -->
+          <input
+          #emailField
+          [formControlName]="'email'"
+          id="email" 
+          type="email" 
+          class="form-control" 
+          placeholder="email">
+          <!-- input feedback icon -->
+          <span 
+          *ngIf="email.touched"
+          class="fa form-control-feedback"
+          [class.fa-check]="email.valid"
+          [class.fa-warning]="email.invalid"></span>
+        </div>
+        <!-- input error help message -->
+        <p class="help-block">
+          <ng-template [ngIf]="email.invalid && email.touched">
+            <span *ngIf="email['errors']['required']">Email is required</span>
+            <span *ngIf="email['errors']['invalidEmail'] && !email['errors']['required']">Not a valid email address</span>
+            <span *ngIf="email['errors']['emailIsUsed']">This email is already registred</span>
+          </ng-template>
+        </p>
+      </div>
+      <!-- FORM BUTTONS GROUP -->
+      <div class="form-group">
+        <button 
+        class="btn btn-primary pull-right"
+        [disabled]="emailForm.invalid">Update</button>
+      </div>
+    </div>   
+  </div>
+</form>

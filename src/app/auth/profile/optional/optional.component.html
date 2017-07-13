@@ -1,0 +1,187 @@
+<form 
+[formGroup]="optionalForm"
+(ngSubmit)="submit()">
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+
+      <!-- FirstName -->
+      <div 
+      class="form-group has-feedback"
+      [class.has-error]="firstName.invalid && firstName.touched && firstName.value"
+      [class.has-success]="firstName.valid && firstName.touched && firstName.value">
+        <label 
+        for="firstName"
+        class="hidden-xs control-label">Firstname</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-user-plus"></i>
+          </div>
+          <!-- firstname input field -->
+          <input
+          [formControlName]="'firstName'"
+          id="firstName" 
+          type="text" 
+          class="form-control" 
+          placeholder="Firstname">
+          <!-- input feedback icon -->
+          <span 
+          *ngIf="firstName.touched"
+          class="fa form-control-feedback"
+          [class.fa-check]="firstName.valid && firstName.value"
+          [class.fa-warning]="firstName.invalid"></span>
+        </div>
+        <!-- input error help message -->
+        <p class="help-block">
+          <ng-template [ngIf]="firstName.invalid && firstName.touched">
+            <span *ngIf="firstName['errors']['isNotAlpha']">The firstname should not contain numbers or special characters.</span>
+          </ng-template>
+        </p>
+      </div>
+
+      <!-- lastName -->
+      <div 
+      class="form-group has-feedback"
+      [class.has-error]="lastName.invalid && lastName.touched && lastName.value"
+      [class.has-success]="lastName.valid && lastName.touched && lastName.value">
+        <label 
+        for="lastName"
+        class="hidden-xs control-label">Lastname</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-user-plus"></i>
+          </div>
+          <!-- lastname input field -->
+          <input
+          [formControlName]="'lastName'"
+          id="lastName" 
+          type="text" 
+          class="form-control" 
+          placeholder="Lastname">
+          <!-- input feedback icon -->
+          <span 
+          *ngIf="lastName.touched"
+          class="fa form-control-feedback"
+          [class.fa-check]="lastName.valid && lastName.value"
+          [class.fa-warning]="lastName.invalid"></span>
+        </div>
+        <!-- input error help message -->
+        <p class="help-block">
+          <ng-template [ngIf]="lastName.invalid && lastName.touched">
+            <span *ngIf="lastName['errors']['isNotAlpha']">The lastname should not contain numbers or special characters.</span>
+          </ng-template>
+        </p>
+      </div>
+
+      <!-- age -->
+      <div 
+      class="form-group has-feedback"
+      [class.has-error]="age.invalid && age.touched && age.value"
+      [class.has-success]="age.valid && age.touched && age.value">
+        <label 
+        for="age"
+        class="hidden-xs control-label">Age</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-user-plus"></i>
+          </div>
+          <!-- age input field -->
+          <input
+          [formControlName]="'age'"
+          id="age" 
+          type="text" 
+          class="form-control" 
+          placeholder="Age">
+          <!-- input feedback icon -->
+          <span 
+          *ngIf="lastName.touched"
+          class="fa form-control-feedback"
+          [class.fa-check]="age.valid && age.value"
+          [class.fa-warning]="age.invalid"></span>
+        </div>
+        <!-- input error help message -->
+        <p class="help-block">
+          <ng-template [ngIf]="age.invalid && age.touched && age.value">
+            <span *ngIf="age['errors']['isNotNumeric']">The age should be a number.</span>
+            <span *ngIf="age['errors']['min']">You should be 18 to ride.</span>
+            <span *ngIf="age['errors']['max']">Sorry, the registered age cannot exceed 200.</span>
+          </ng-template>
+        </p>
+      </div>
+
+      <!-- location -->
+      <div 
+      class="form-group has-feedback"
+      [class.has-error]="location.invalid && location.touched && location.value"
+      [class.has-success]="location.valid && location.touched && location.value">
+        <label 
+        for="location"
+        class="hidden-xs control-label">Location</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-map-marker"></i>
+          </div>
+          <!-- location input field -->
+          <input
+          [formControlName]="'location'"
+          id="location" 
+          type="text" 
+          class="form-control" 
+          placeholder="Location">
+          <!-- input feedback icon -->
+          <span 
+          *ngIf="location.touched"
+          class="fa form-control-feedback"
+          [class.fa-check]="location.valid && location.value"
+          [class.fa-warning]="location.invalid"></span>
+        </div>
+        <!-- input error help message -->
+        <p class="help-block">
+          <ng-template [ngIf]="location.invalid && location.touched && location.value">
+           
+          </ng-template>
+        </p>
+      </div>
+
+      <!-- phone -->
+      <div 
+      class="form-group has-feedback"
+      [class.has-error]="phone.invalid && phone.touched && phone.value"
+      [class.has-success]="phone.valid && phone.touched && phone.value">
+        <label 
+        for="phone"
+        class="hidden-xs control-label">Phone</label>
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="fa fa-phone"></i>
+          </div>
+          <!-- phone input field -->
+          <input
+          [formControlName]="'phone'"
+          id="phone" 
+          type="text" 
+          class="form-control" 
+          placeholder="Phone">
+          <!-- input feedback icon -->
+          <span 
+          *ngIf="phone.touched"
+          class="fa form-control-feedback"
+          [class.fa-check]="phone.valid && phone.value"
+          [class.fa-warning]="phone.invalid"></span>
+        </div>
+        <!-- input error help message -->
+        <p class="help-block">
+          <ng-template [ngIf]="phone.invalid && phone.touched && phone.value">
+            <span *ngIf="phone['errors']['isNotNumeric']">The phone number should only contain numbers, replace + by 00 if it is the case.</span>
+          </ng-template>
+        </p>
+      </div>
+      <!-- FORM BUTTONS GROUP -->
+      <div class="form-group">
+        <button 
+        #submitBtn
+        class="btn btn-primary pull-right"
+        [disabled]="optionalForm.invalid">Update</button>
+      </div>
+    </div>   
+  </div>
+</form>
